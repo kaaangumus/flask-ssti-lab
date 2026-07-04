@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MİT - Operasyon Kontrol Merkezi</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">MİT PORTAL</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="{{ url_for('dashboard') }}">KONTROL MERKEZİ</a></li>
+                    <li><a href="{{ url_for('personnel_search') }}">PERSONEL ARAMA</a></li>
+                    <li><a href="{{ url_for('operations') }}">OPERASYONLAR</a></li>
+                    <li><a href="{{ url_for('reports') }}">RAPORLAR</a></li>
+                    <li><a href="{{ url_for('logout') }}">ÇIKIŞ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <div class="classification">ULTRA SECRET</div>
+
+        <div class="dashboard-header">
+            <h1>OPERASYON KONTROL MERKEZİ</h1>
+            <div style="color: #ff0040; margin-top: 10px; font-size: 16px;">
+                HOŞGELDİN {{ session.name }}
+            </div>
+
+            <div class="operator-info">
+                <div class="info-item">
+                    <div class="label">OPERATÖR</div>
+                    <div class="value">{{ session.id }}</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">YETKİ SEVİYESİ</div>
+                    <div class="value">{{ session.clearance }}</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">DEPARTMAN</div>
+                    <div class="value">{{ session.department }}</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">DURUM</div>
+                    <div class="value" style="color: #ff0040;">AKTİF</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modules-grid">
+            <div class="module-card" onclick="window.location.href='{{ url_for('personnel_search') }}'">
+                <div class="module-icon">👤</div>
+                <h3>PERSONEL ARAMA</h3>
+                <p>Gizli personel veritabanında arama yapın. Yetki seviyenize göre bilgilere erişin.</p>
+                <div style="margin-top: 15px; color: #ff0040; font-size: 12px;">
+                    YETKİ GEREKLİ: SECRET+
+                </div>
+            </div>
+
+            <div class="module-card" onclick="window.location.href='{{ url_for('operations') }}'">
+                <div class="module-icon">🎯</div>
+                <h3>AKTİF OPERASYONLAR</h3>
+                <p>Devam eden gizli operasyonları izleyin ve yönetin. Kritik misyon durumları.</p>
+                <div style="margin-top: 15px; color: #ff0040; font-size: 12px;">
+                    YETKİ GEREKLİ: TOP SECRET
+                </div>
+            </div>
+
+            <div class="module-card" onclick="window.location.href='{{ url_for('reports') }}'">
+                <div class="module-icon">📊</div>
+                <h3>İSTİHBARAT RAPORLARI</h3>
+                <p>Analiz raporları ve istihbarat değerlendirmelerine erişin.</p>
+                <div style="margin-top: 15px; color: #ff0040; font-size: 12px;">
+                    YETKİ GEREKLİ: CONFIDENTIAL+
+                </div>
+            </div>
+
+            <div class="module-card">
+                <div class="module-icon">🔒</div>
+                <h3>GÜVENLIK MERKEZİ</h3>
+                <p>Sistem güvenliği ve erişim kontrolleri. Şifreleme ve güvenlik protokolleri.</p>
+                <div style="margin-top: 15px; color: #888; font-size: 12px;">
+                    BAKIM MODUNDA
+                </div>
+            </div>
+
+            <div class="module-card">
+                <div class="module-icon">📡</div>
+                <h3>HABERLEŞME</h3>
+                <p>Güvenli haberleşme kanalları ve şifrelenmiş mesajlaşma sistemi.</p>
+                <div style="margin-top: 15px; color: #888; font-size: 12px;">
+                    BAKIM MODUNDA
+                </div>
+            </div>
+
+            <div class="module-card">
+                <div class="module-icon">🌐</div>
+                <h3>SİBER OPERASYONLAR</h3>
+                <p>Siber güvenlik operasyonları ve dijital istihbarat toplama.</p>
+                <div style="margin-top: 15px; color: #ff0040; font-size: 12px;">
+                    YETKİ GEREKLİ: ULTRA SECRET
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 50px; text-align: center; padding: 30px; background: rgba(255, 0, 64, 0.1); border: 2px solid #ff0040;">
+            <div style="color: #ff0040; font-size: 14px; line-height: 1.8;">
+                <strong>GÜVENLİK UYARISI</strong><br>
+                Bu sistemdeki tüm aktiviteler kayıt altına alınmaktadır.<br>
+                Yetkisiz erişim girişimleri anında tespit edilir ve yasal işlem başlatılır.<br>
+                Sistem kullanımı sırasında güvenlik protokollerine uyunuz.
+            </div>
+            <div style="margin-top: 20px; color: #888; font-size: 12px;">
+                Son güvenlik taraması: ŞUAN | Sistem durumu: GÜVENLI | Tehdit seviyesi: DÜŞÜK
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Module hover effects
+            const modules = document.querySelectorAll('.module-card');
+            modules.forEach(module => {
+                module.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+
+                module.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Live time update
+            function updateTime() {
+                const now = new Date();
+                const timeStr = now.toLocaleString('tr-TR');
+                // Update any time displays if needed
+            }
+            setInterval(updateTime, 1000);
+
+            // Warning blink effect
+            const classification = document.querySelector('.classification');
+            setInterval(() => {
+                classification.style.opacity = classification.style.opacity === '0.7' ? '1' : '0.7';
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

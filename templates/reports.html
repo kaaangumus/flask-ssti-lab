@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MİT - İstihbarat Raporları</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">MİT PORTAL</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="{{ url_for('dashboard') }}">KONTROL MERKEZİ</a></li>
+                    <li><a href="{{ url_for('personnel_search') }}">PERSONEL ARAMA</a></li>
+                    <li><a href="{{ url_for('operations') }}">OPERASYONLAR</a></li>
+                    <li><a href="{{ url_for('reports') }}">RAPORLAR</a></li>
+                    <li><a href="{{ url_for('logout') }}">ÇIKIŞ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <div class="classification">CONFIDENTIAL</div>
+
+        <div class="dashboard-header">
+            <h1>İSTİHBARAT RAPORLARI</h1>
+            <div style="color: #ff0040; margin-top: 10px; font-size: 14px;">
+                YETKİLİ OPERATÖR: {{ session.name }} ({{ session.clearance }})
+            </div>
+        </div>
+
+        <div style="display: grid; gap: 20px;">
+            <div style="background: rgba(0, 0, 0, 0.8); border: 2px solid #00ff41; padding: 25px;">
+                <h3 style="color: #00ff41; margin-bottom: 15px; font-family: 'Orbitron', monospace;">
+                    GÜNLÜK İSTİHBARAT ÖZETİ - 06.08.2024
+                </h3>
+                <div style="color: #888; margin-bottom: 15px; font-size: 12px;">
+                    SINIFLANDIRMA: CONFIDENTIAL | RAPOR NO: MIT-2024-08-06-001
+                </div>
+                <div style="background: rgba(0, 255, 65, 0.1); padding: 15px; border: 1px solid #00ff41;">
+                    • Avrupa bölgesinden gelen istihbarat raporları değerlendirildi<br>
+                    • Siber güvenlik tehditleri düşük seviyede<br>
+                    • Ekonomik istihbarat faaliyetleri normal seyirde<br>
+                    • Kritik altyapı güvenliği kontrolleri tamamlandı
+                </div>
+                <div style="margin-top: 15px; text-align: right; color: #888; font-size: 11px;">
+                    HAZIRLAYAN: ANALİZ-07 | ONAYLAYAN: ŞUBE-02
+                </div>
+            </div>
+
+            <div style="background: rgba(0, 0, 0, 0.8); border: 2px solid #ffff00; padding: 25px;">
+                <h3 style="color: #ffff00; margin-bottom: 15px; font-family: 'Orbitron', monospace;">
+                    HAFTALIK TRENDLĞİ ANALİZİ - 31.07-06.08.2024
+                </h3>
+                <div style="color: #888; margin-bottom: 15px; font-size: 12px;">
+                    SINIFLANDIRMA: SECRET | RAPOR NO: MIT-2024-W31-002
+                </div>
+                <div style="background: rgba(255, 255, 0, 0.1); padding: 15px; border: 1px solid #ffff00;">
+                    • Bölgesel istihbarat aktivitelerinde %12 artış gözlemlendi<br>
+                    • Teknoloji transferi faaliyetleri yoğunlaştı<br>
+                    • Diplomatik kanallardan alınan bilgiler analiz edildi<br>
+                    • Operasyonel güvenlik seviyesi yükseltildi
+                </div>
+                <div style="margin-top: 15px; text-align: right; color: #888; font-size: 11px;">
+                    HAZIRLAYAN: STRATEJİ-03 | ONAYLAYAN: MÜDÜR-01
+                </div>
+            </div>
+
+            <div style="background: rgba(0, 0, 0, 0.8); border: 2px solid #ff0040; padding: 25px;">
+                <h3 style="color: #ff0040; margin-bottom: 15px; font-family: 'Orbitron', monospace;">
+                    KRİTİK TEHDİT DEĞERLENDİRMESİ - TEMMUZ 2024
+                </h3>
+                <div style="color: #888; margin-bottom: 15px; font-size: 12px;">
+                    SINIFLANDIRMA: TOP SECRET | RAPOR NO: MIT-2024-THREAT-007
+                </div>
+                <div style="background: rgba(255, 0, 64, 0.1); padding: 15px; border: 1px solid #ff0040;">
+                    <div style="text-align: center; color: #ff0040; font-weight: bold; margin-bottom: 10px;">
+                        ERİŞİM KISITLI - YALNIZCA TOP SECRET+ YETKİLİLER
+                    </div>
+                    <div style="filter: blur(2px);">
+                        • [SINIFLANDIRILMIŞ] bölgesindeki faaliyetler izlendi<br>
+                        • Yabancı istihbarat servislerinin aktiviteleri tespit edildi<br>
+                        • Kritik altyapıya yönelik potansiyel tehditler analiz edildi<br>
+                        • Karşı istihbarat önlemleri güçlendirildi
+                    </div>
+                </div>
+                <div style="margin-top: 15px; text-align: right; color: #888; font-size: 11px;">
+                    HAZIRLAYAN: [SINIFLANDIRILMIŞ] | ONAYLAYAN: [SINIFLANDIRILMIŞ]
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 30px; background: rgba(0, 0, 0, 0.9); border: 2px solid #00ff41; padding: 20px;">
+            <h3 style="color: #00ff41; margin-bottom: 15px;">RAPOR ARŞİVİ ERİŞİMİ</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                <div style="background: rgba(0, 255, 65, 0.1); padding: 15px; border: 1px solid #00ff41; cursor: pointer;"
+                     onclick="alert('ARŞİV ERİŞİMİ - Yetki gerekli: CONFIDENTIAL+')">
+                    <strong>GÜNLÜK RAPORLAR</strong><br>
+                    <small>Son 30 gün - 127 rapor</small>
+                </div>
+                <div style="background: rgba(255, 255, 0, 0.1); padding: 15px; border: 1px solid #ffff00; cursor: pointer;"
+                     onclick="alert('ARŞİV ERİŞİMİ - Yetki gerekli: SECRET+')">
+                    <strong>HAFTALIK ANALİZLER</strong><br>
+                    <small>Son 12 hafta - 48 rapor</small>
+                </div>
+                <div style="background: rgba(255, 0, 64, 0.1); padding: 15px; border: 1px solid #ff0040; cursor: pointer;"
+                     onclick="alert('ERİŞİM REDDEDİLDİ - Yetki gerekli: TOP SECRET+')">
+                    <strong>KRİTİK DEĞERLENDİRMELER</strong><br>
+                    <small>Son 6 ay - 23 rapor</small>
+                </div>
+                <div style="background: rgba(128, 128, 128, 0.1); padding: 15px; border: 1px solid #888; cursor: not-allowed;"
+                     onclick="alert('BAKIM MODUNDA - Sistem güncellemesi')">
+                    <strong>YILLIK RAPORLAR</strong><br>
+                    <small>Bakım modunda</small>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 30px; text-align: center; padding: 25px; background: rgba(255, 0, 64, 0.1); border: 2px solid #ff0040;">
+            <div style="color: #ff0040; font-size: 14px; line-height: 1.8;">
+                <strong>RAPOR GÜVENLİĞİ UYARISI</strong><br>
+                Bu raporlar devlet güvenliği için kritik bilgiler içermektedir.<br>
+                Rapor indirme, yazdırma ve paylaşma işlemleri kayıt altına alınır.<br>
+                Güvenlik ihlali durumunda yasal soruşturma başlatılacaktır.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Classification effect
+            const classification = document.querySelector('.classification');
+            setInterval(() => {
+                classification.style.opacity = classification.style.opacity === '0.7' ? '1' : '0.7';
+            }, 2200);
+
+            // Archive access hover effects
+            const archives = document.querySelectorAll('[onclick*="alert"]');
+            archives.forEach(archive => {
+                archive.addEventListener('mouseenter', function() {
+                    if (!this.style.cursor.includes('not-allowed')) {
+                        this.style.transform = 'scale(1.05)';
+                        this.style.boxShadow = '0 5px 20px rgba(0,0,0,0.3)';
+                    }
+                });
+
+                archive.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                    this.style.boxShadow = 'none';
+                });
+            });
+
+            // Blur effect removal for authorized users (simulation)
+            setTimeout(() => {
+                const blurredContent = document.querySelector('[style*="blur"]');
+                if (blurredContent && '{{ session.clearance }}' === 'TOP SECRET') {
+                    // Normally you'd check actual authorization
+                    // blurredContent.style.filter = 'none';
+                }
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MİT - Güvenli Erişim Terminali</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-terminal">
+            <div class="classification">ULTRA SECRET</div>
+
+            <div class="terminal-header">
+                <h1>MİT PORTAL</h1>
+                <div class="subtitle">YETKISIZ ERIŞIM YASAKTIR</div>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert {{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST" action="{{ url_for('login') }}">
+                <div class="form-group">
+                    <label for="username">OPERATÖR KODU:</label>
+                    <input type="text" id="username" name="username" required
+                           placeholder="OPERATÖR KODUNU GİRİN" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">GÜVENLİK KODU:</label>
+                    <input type="password" id="password" name="password" required
+                           placeholder="GÜVENLİK KODUNU GİRİN" autocomplete="off">
+                </div>
+
+                <button type="submit" class="btn-terminal">
+                    SİSTEME ERİŞ
+                </button>
+            </form>
+
+            <div style="margin-top: 30px; padding: 20px; border: 1px solid #ff0040; background: rgba(255, 0, 64, 0.1);">
+                <div style="text-align: center; color: #ff0040; font-size: 12px; line-height: 1.6;">
+                    <strong>UYARI:</strong><br>
+                    Bu sistem devlet güvenliği için kritik öneme sahiptir.<br>
+                    Yetkisiz erişim girişimleri kaydedilmekte ve takip edilmektedir.<br>
+                    <br>
+                    <span style="color: #888; font-size: 10px;">
+                        Sistem erişimi için güvenlik yetkiniz kontrol edilecektir.
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Terminal typing effect
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.style.boxShadow = '0 0 30px rgba(0, 255, 65, 0.8)';
+                });
+
+                input.addEventListener('blur', function() {
+                    this.style.boxShadow = '0 0 20px rgba(0, 255, 65, 0.5)';
+                });
+            });
+
+            // Warning flashing
+            const warning = document.querySelector('.classification');
+            if (warning) {
+                setInterval(() => {
+                    warning.style.opacity = warning.style.opacity === '0.5' ? '1' : '0.5';
+                }, 1000);
+            }
+        });
+    </script>
+    <!--
+Gece yarısı, yağmur Kızılay’ın boş sokaklarında sertçe vuruyordu. Eski bir hanın bodrum katında, duvarları nem sarmış bir odada iki kişi karşı karşıya oturuyordu. Masanın üzerinde tek bir laptop, yanında kırmızı mühürlü bir dosya vardı.
+
+Gri takım elbiseli adam sigarasından derin bir nefes çekti, dumanı tavana doğru bıraktı bu FUAT'ın ta kendisiydi.
+— “Dinle İskender… Bu portal devletin arşivine açılan kapı. İçeri girebilmen için operator kodunu ve şifresini bilmen gerekiyor. Operator kodun iskender. Şifren kontrtim34. Bunları girdiğinde seni karşılayacak portalı kırmalısın GLADIO örgütünün lideri HTS kayıtlarından bulundu ve bir dosyanın içinde saklandı .”
+
+İskender kaşlarını çattı.
+— “Notacı Paşamı ?”
+— “Hayır ! Gladio’nun en eski planı. Onu gördüğünde kimin dost kimin düşman olduğunu anlayacaksın. Ama unutma… bu dosyayı indirdiğin an  geri sayım başlar.”
+
+Odanın kapısı hafifçe gıcırdadı. Uzakta bir araba motoru çalıştı. İskender dosyayı aldı, montunun içine sakladı. Dışarı adım attığında, yağmurun sesi bile ona artık farklı geliyordu. Bu gece uzun olacaktı.
+-->
+
+</body>
+</html>

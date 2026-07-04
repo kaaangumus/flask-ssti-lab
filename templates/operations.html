@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MİT - Aktif Operasyonlar</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">MİT PORTAL</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="{{ url_for('dashboard') }}">KONTROL MERKEZİ</a></li>
+                    <li><a href="{{ url_for('personnel_search') }}">PERSONEL ARAMA</a></li>
+                    <li><a href="{{ url_for('operations') }}">OPERASYONLAR</a></li>
+                    <li><a href="{{ url_for('reports') }}">RAPORLAR</a></li>
+                    <li><a href="{{ url_for('logout') }}">ÇIKIŞ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <div class="classification">TOP SECRET</div>
+
+        <div class="dashboard-header">
+            <h1>AKTİF OPERASYONLAR</h1>
+            <div style="color: #ff0040; margin-top: 10px; font-size: 14px;">
+                YETKİLİ OPERATÖR: {{ session.name }} ({{ session.clearance }})
+            </div>
+        </div>
+
+        <div style="display: grid; gap: 30px;">
+            <div style="background: rgba(0, 0, 0, 0.8); border: 2px solid #ff0040; padding: 30px;">
+                <h3 style="color: #ff0040; margin-bottom: 20px; font-family: 'Orbitron', monospace;">
+                    OPERASYON: KARANLIK BULUT
+                </h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                    <div>
+                        <strong>DURUM:</strong> AKTİF<br>
+                        <strong>ÖNCELİK:</strong> YÜKSEK<br>
+                        <strong>BAŞLANGIÇ:</strong> 2024-07-15
+                    </div>
+                    <div>
+                        <strong>LOKASYON:</strong> SINIFLANDIRILMIŞ<br>
+                        <strong>AJANLAR:</strong> 7 AKTİF<br>
+                        <strong>BİTİŞ TAHMİNİ:</strong> 2024-09-30
+                    </div>
+                    <div>
+                        <strong>KOMUTAN:</strong> KRAL-01<br>
+                        <strong>YETKİ SEVİYESİ:</strong> TOP SECRET<br>
+                        <strong>RAPOR SIKLIĞİ:</strong> GÜNLİK
+                    </div>
+                </div>
+                <div style="background: rgba(255, 0, 64, 0.1); padding: 15px; border: 1px solid #ff0040;">
+                    <strong>OPERASYONEl ÖZET:</strong> Kritik hedeflerin izlenmesi ve istihbarat toplanması.
+                    Detaylar sadece ULTRA SECRET yetki seviyesinde görüntülenebilir.
+                </div>
+            </div>
+
+            <div style="background: rgba(0, 0, 0, 0.8); border: 2px solid #ffff00; padding: 30px;">
+                <h3 style="color: #ffff00; margin-bottom: 20px; font-family: 'Orbitron', monospace;">
+                    OPERASYON: ÇELIK KARTAL
+                </h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                    <div>
+                        <strong>DURUM:</strong> PLANLAMA<br>
+                        <strong>ÖNCELİK:</strong> ORTA<br>
+                        <strong>BAŞLANGIÇ:</strong> 2024-08-20
+                    </div>
+                    <div>
+                        <strong>LOKASYON:</strong> AVRUPA<br>
+                        <strong>AJANLAR:</strong> 3 BEKLEMEDE<br>
+                        <strong>BİTİŞ TAHMİNİ:</strong> 2024-11-15
+                    </div>
+                    <div>
+                        <strong>KOMUTAN:</strong> ŞAHIN-03<br>
+                        <strong>YETKİ SEVİYESİ:</strong> SECRET<br>
+                        <strong>RAPOR SIKLIĞİ:</strong> HAFTALIK
+                    </div>
+                </div>
+                <div style="background: rgba(255, 255, 0, 0.1); padding: 15px; border: 1px solid #ffff00;">
+                    <strong>OPERASYONEl ÖZET:</strong> Ekonomik istihbarat toplama operasyonu.
+                    Avrupa pazarlarında stratejik bilgi edinimi.
+                </div>
+            </div>
+
+            <div style="background: rgba(0, 0, 0, 0.8); border: 2px solid #00ff41; padding: 30px;">
+                <h3 style="color: #00ff41; margin-bottom: 20px; font-family: 'Orbitron', monospace;">
+                    OPERASYON: DİJİTAL KALKAN
+                </h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                    <div>
+                        <strong>DURUM:</strong> TAMAMLANDI<br>
+                        <strong>ÖNCELİK:</strong> KRİTİK<br>
+                        <strong>BAŞLANGIÇ:</strong> 2024-06-01
+                    </div>
+                    <div>
+                        <strong>LOKASYON:</strong> SİBER UZAY<br>
+                        <strong>AJANLAR:</strong> 12 GÖREV<br>
+                        <strong>BİTİŞ:</strong> 2024-07-30
+                    </div>
+                    <div>
+                        <strong>KOMUTAN:</strong> SİBER-01<br>
+                        <strong>YETKİ SEVİYESİ:</strong> TOP SECRET<br>
+                        <strong>BAŞARI ORANI:</strong> %98
+                    </div>
+                </div>
+                <div style="background: rgba(0, 255, 65, 0.1); padding: 15px; border: 1px solid #00ff41;">
+                    <strong>OPERASYONEl ÖZET:</strong> Kritik altyapının siber saldırılara karşı korunması.
+                    Operasyon başarıyla tamamlandı, tüm hedefler güvence altına alındı.
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px; padding: 30px; background: rgba(255, 0, 64, 0.1); border: 2px solid #ff0040; text-align: center;">
+            <h3 style="color: #ff0040; margin-bottom: 15px;">GÜVENLİK UYARISI</h3>
+            <div style="color: #ff0040; line-height: 1.8;">
+                Bu sayfadaki bilgiler DEVLET SIRRI niteliğindedir.<br>
+                Yetkisiz kişilerle paylaşılması VATANA İHANET suçunu oluşturur.<br>
+                Tüm erişim kayıtları MİT Güvenlik Birimi tarafından izlenmektedir.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Classification blink
+            const classification = document.querySelector('.classification');
+            setInterval(() => {
+                classification.style.opacity = classification.style.opacity === '0.6' ? '1' : '0.6';
+            }, 1800);
+
+            // Operation status indicators
+            const operations = document.querySelectorAll('[style*="border: 2px solid"]');
+            operations.forEach(op => {
+                op.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.02)';
+                    this.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5)';
+                });
+
+                op.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                    this.style.boxShadow = 'none';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

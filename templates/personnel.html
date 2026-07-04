@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MİT - Personel Arama Sistemi</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">MİT PORTAL</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="{{ url_for('dashboard') }}">KONTROL MERKEZİ</a></li>
+                    <li><a href="{{ url_for('personnel_search') }}">PERSONEL ARAMA</a></li>
+                    <li><a href="{{ url_for('operations') }}">OPERASYONLAR</a></li>
+                    <li><a href="{{ url_for('reports') }}">RAPORLAR</a></li>
+                    <li><a href="{{ url_for('logout') }}">ÇIKIŞ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="personnel-container">
+        <div class="classification">ULTRA SECRET</div>
+
+        <div class="search-terminal">
+            <h2>PERSONEL VERİTABANI ARAMA SİSTEMİ</h2>
+            <div style="text-align: center; margin-bottom: 20px; color: #ff0040; font-size: 12px;">
+                YETKİLİ PERSONEL: {{ session.name }} ({{ session.clearance }})<br>
+                SİSTEM KAYITLARI TAKİP EDİLMEKTEDİR
+            </div>
+
+            <form method="POST" class="search-form">
+                <input type="text" name="search_term" class="search-input"
+                       placeholder="PERSONEL ADI, DEPARTMAN VEYA KOD GİRİNİZ..."
+                       value="{{ request.form.search_term if request.form.search_term }}"
+                       autocomplete="off">
+                <button type="submit" class="search-btn">ARAMA YAP</button>
+            </form>
+
+            <div style="margin-top: 20px; padding: 15px; background: rgba(255, 0, 64, 0.1); border: 1px solid #ff0040; font-size: 12px;">
+                <strong>ARAMA KURALLARI:</strong><br>
+                • Sadece yetki seviyenizde veya altındaki bilgilere erişebilirsiniz<br>
+                • Tüm aramalar sistem günlüklerine kaydedilir<br>
+                • Yetkisiz bilgi erişim girişimi güvenlik ihlali sayılır<br>
+                • Gelişmiş arama için özel karakterler kullanılabilir
+            </div>
+        </div>
+
+        {% if search_term %}
+        <div class="search-results">
+            <div class="result-header">
+                <h3>PERSONEL ARAMA SONUCLARI</h3>
+                <div class="classification">SINIFLANDIRILMIS BILGI</div>
+            </div>
+            <p>Arama terimi: {{ search_term }}</p>
+
+            {% if template_error %}
+                <div class="no-results">{{ template_error }}</div>
+            {% else %}
+                <p>Template sonucu: {{ template_output }}</p>
+                {% for person in found_personnel %}
+                <div class="personnel-card">
+                    <div class="personnel-id">{{ person.id }}</div>
+                    <div class="personnel-name">{{ person.name }}</div>
+                    <div class="personnel-dept">{{ person.department }}</div>
+                    <div class="personnel-clearance {{ person.clearance|replace(' ', '_')|lower }}">{{ person.clearance }}</div>
+                    <div class="personnel-location">{{ person.location }}</div>
+                </div>
+                {% else %}
+                <div class="no-results">ARAMA KRITERLERINE UYGUN PERSONEL BULUNAMADI</div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <div style="margin-top: 30px; padding: 20px; background: rgba(0, 0, 0, 0.8); border: 2px solid #00ff41;">
+            <h3 style="color: #00ff41; margin-bottom: 15px; font-family: 'Orbitron', monospace;">SİSTEM BİLGİLERİ</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; font-size: 12px;">
+                <div>
+                    <strong>AKTİF PERSONEL:</strong> 1247<br>
+                    <strong>DEPARTMAN SAYISI:</strong> 23<br>
+                    <strong>GÜVENLİK SEVİYESİ:</strong> MAXIMUM
+                </div>
+                <div>
+                    <strong>SON GÜNCELLEME:</strong> 2024-08-06<br>
+                    <strong>VERİTABANI DURUMU:</strong> ONLINE<br>
+                    <strong>YEDEKLEME:</strong> GÜNDELİK
+                </div>
+                <div>
+                    <strong>ERİŞİM LOGLARİ:</strong> AKTİF<br>
+                    <strong>ŞİFRELEME:</strong> AES-256<br>
+                    <strong>AUDIT MOD:</strong> AÇIK
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 20px; text-align: center; color: #888; font-size: 10px;">
+            Bu sistem kritik güvenlik önlemleri ile korunmaktadır.<br>
+            Tüm aktiviteler 7/24 izlenmekte ve kayıt altına alınmaktadır.<br>
+            Şüpheli aktivite durumunda sistem otomatik olarak güvenlik birimi
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Search input focus effect
+            const searchInput = document.querySelector('.search-input');
+            if (searchInput) {
+                searchInput.addEventListener('focus', function() {
+                    this.style.borderColor = '#ff0040';
+                    this.style.boxShadow = '0 0 30px rgba(255, 0, 64, 0.5)';
+                });
+
+                searchInput.addEventListener('blur', function() {
+                    this.style.borderColor = '#00ff41';
+                    this.style.boxShadow = '0 0 20px rgba(0, 255, 65, 0.5)';
+                });
+            }
+
+            // Terminal typing effect for search
+            const searchBtn = document.querySelector('.search-btn');
+            if (searchBtn) {
+                searchBtn.addEventListener('click', function() {
+                    this.style.background = '#ff0040';
+                    this.style.color = '#000';
+                    setTimeout(() => {
+                        this.style.background = 'rgba(0, 255, 65, 0.1)';
+                        this.style.color = '#00ff41';
+                    }, 200);
+                });
+            }
+
+            // Classification warning blink
+            const classification = document.querySelector('.classification');
+            setInterval(() => {
+                classification.style.opacity = classification.style.opacity === '0.5' ? '1' : '0.5';
+            }, 2000);
+        });
+
+        // Prevent form submission on Enter in certain cases
+        document.querySelector('.search-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && this.value.trim() === '') {
+                e.preventDefault();
+                alert('UYARI: Arama kriteri gereklidir!');
+            }
+        });
+    </script>
+</body>
+</html>
