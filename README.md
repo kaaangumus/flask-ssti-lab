@@ -26,14 +26,7 @@ docker run --rm --read-only --cap-drop=ALL --security-opt=no-new-privileges \
 
 Open `http://127.0.0.1:5000`.
 
-Credentials:
-
-```text
-Username: iskender
-Password: kontrtim34
-```
-
-Start with the harmless payload `{{ 7 * 7 }}` on the personnel search page. The remaining discovery is intentionally left to the learner.
+Your first objective is to discover the login credentials from the clues exposed by the application. After signing in, start with the harmless payload `{{ 7 * 7 }}` on the personnel search page. The remaining discovery is intentionally left to the learner.
 
 ## Local development
 
